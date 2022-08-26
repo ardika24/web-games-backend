@@ -19,7 +19,7 @@ module.exports = {
     username: process.env.DB_USERNAME_PROD || "postgres",
     password: process.env.DB_PASSWORD_PROD || "postgres",
     database: process.env.DB_PROD || "ch9-challange_production",
-    host: "127.0.0.1",
+    host: "localhost",
     dialect: "postgres",
   },
 };
