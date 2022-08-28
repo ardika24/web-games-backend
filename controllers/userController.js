@@ -1,6 +1,5 @@
-const { User } = require("../models");
 const { Op } = require("sequelize");
-const { hashPassword } = require("../utils/passwordHandler");
+const { User } = require("../models");
 
 class UserController {
   static async getUsers(req, res, next) {
@@ -59,7 +58,7 @@ class UserController {
     }
   }
 
-  static async updateUser(req, res, next) {
+  static async updateUser(req, res) {
     try {
       const { id } = req.params;
       const user = await User.findByPk(id);
@@ -73,7 +72,7 @@ class UserController {
       const updatedUser = await User.update(
         { ...req.body, total_score: !score ? user.total_score : score },
         {
-          where: { id: id },
+          where: { id },
         }
       );
 
@@ -81,7 +80,7 @@ class UserController {
         return res.status(400);
       }
 
-      if (updatedUser == 1) {
+      if (updatedUser === 1) {
         return res.status(200).json({
           result: "Success",
           message: `User with id: ${id} successfully updated`,
@@ -102,9 +101,9 @@ class UserController {
       const { id } = req.params;
 
       const destroyed = await User.destroy({
-        where: { id: id },
+        where: { id },
       });
-      if (destroyed == 1) {
+      if (destroyed === 1) {
         res.status(200).json({
           result: "Success",
           message: `User with id: ${id}, was deleted successfully`,
