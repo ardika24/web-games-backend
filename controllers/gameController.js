@@ -10,7 +10,10 @@ module.exports = {
         error: "No high score found",
       });
     }
-    return res.status(200).json(highScore);
+    return res.status(200).json({
+      result: "Success",
+      data: highScore,
+    });
   },
 
   async updateScore(req, res) {
