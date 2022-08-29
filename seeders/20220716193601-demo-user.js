@@ -1,8 +1,7 @@
-"use strict";
 const bcrypt = require("bcrypt");
 
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up(queryInterface) {
     await queryInterface.bulkInsert("Users", [
       {
         email: "superman@gmail.com",
@@ -29,7 +28,7 @@ module.exports = {
     ]);
   },
 
-  async down(queryInterface, Sequelize) {
+  async down() {
     /**
      * Add commands to revert seed here.
      *

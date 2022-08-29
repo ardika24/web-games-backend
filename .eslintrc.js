@@ -9,6 +9,7 @@ module.exports = {
     ecmaVersion: "latest",
   },
   rules: {
-    "prefer-promise-rejects-errors": "off",
+    camelcase: "off",
+    "prefer-promise-reject-errors": "off",
   },
 };
