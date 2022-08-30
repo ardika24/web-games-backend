@@ -1,2 +1,2 @@
-release: npx sequelize-cli db:migrate && npx sequelize-cli db:seed
+release: npx sequelize-cli db:migrate
 web: node app.js

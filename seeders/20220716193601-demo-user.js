@@ -1,4 +1,4 @@
-const bcrypt = require("bcrypt");
+const { hash } = require("bcrypt");
 
 module.exports = {
   async up(queryInterface) {
@@ -6,7 +6,7 @@ module.exports = {
       {
         email: "superman@gmail.com",
         username: "superman423",
-        password: await bcrypt("WRsuperman"),
+        password: await hash("WRsuperman", 10),
         total_score: 100,
         bio: "Jekardah",
         city: "Indonesia",
@@ -17,7 +17,7 @@ module.exports = {
       {
         email: "radityadika@gmail.com",
         username: "raditya123",
-        password: await bcrypt("radityadika12"),
+        password: await hash("radityadika12", 10),
         total_score: 50,
         bio: "Bali",
         city: "Indonesia",
