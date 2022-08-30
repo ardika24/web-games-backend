@@ -77,7 +77,8 @@ module.exports = (sequelize, DataTypes) => {
         id: this.id,
         username: this.username,
       };
-      const secret = "apayaaa";
+      const secret = process.env.APP_SECRET;
+      if (!secret) throw new Error("Please set APP_SECRET on env");
       const token = jwt.sign(payload, secret);
       return token;
     }

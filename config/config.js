@@ -5,15 +5,16 @@ module.exports = {
     username: process.env.DB_USERNAME_DEV || "postgres",
     password: process.env.DB_PASSWORD_DEV || "postgres",
     database: process.env.DB_DEV || "ch9-challange_development",
-    host: "127.0.0.1",
+    host: "localhost",
     dialect: "postgres",
   },
   test: {
     username: process.env.DB_USERNAME_TEST || "postgres",
     password: process.env.DB_PASSWORD_TEST || "postgres",
     database: process.env.DB_TEST || "ch9-challange_test",
-    host: "127.0.0.1",
-    dialect: "mysql",
+    host: "localhost",
+    dialect: "postgres",
+    logging: false,
   },
   production: {
     // Reference: https://stackoverflow.com/a/70243144
