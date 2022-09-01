@@ -1,2 +1,2 @@
-release: npx sequelize-cli db:migrate
-web: node app.js
+release: npm run migrate
+web: npm run start

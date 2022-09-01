@@ -1,5 +1,5 @@
-const { Op } = require("sequelize");
-const { User } = require("../models");
+const { Op } = require('sequelize');
+const { User } = require('../models');
 
 class UserController {
   static async getUsers(req, res) {
@@ -33,7 +33,7 @@ class UserController {
 
     if (!data) {
       return res.status(404).json({
-        error: "No user found",
+        error: 'No user found',
       });
     }
     return res.status(200).json(data);
@@ -44,12 +44,12 @@ class UserController {
     const user = await User.findByPk(id);
     if (!user) {
       return res.status(404).json({
-        result: "Not Found",
+        result: 'Not Found',
         message: `User with ${id} not found`,
       });
     }
     return res.status(200).json({
-      result: "Success",
+      result: 'Success',
       data: user,
     });
   }
@@ -60,7 +60,7 @@ class UserController {
     const user = await User.findByPk(id);
     if (!user) {
       return res.status(404).json({
-        result: "Not Found",
+        result: 'Not Found',
         message: `User with ${id} not found`,
       });
     }
@@ -70,12 +70,12 @@ class UserController {
     });
     if (!updatedUser) {
       return res.status(400).json({
-        result: "Failed",
-        message: "Failed to update user",
+        result: 'Failed',
+        message: 'Failed to update user',
       });
     }
     return res.status(200).json({
-      result: "Success",
+      result: 'Success',
       message: `User with id: ${id} successfully updated`,
     });
   }
@@ -89,12 +89,12 @@ class UserController {
       });
       if (destroyed === 1) {
         res.status(200).json({
-          result: "Success",
+          result: 'Success',
           message: `User with id: ${id}, was deleted successfully`,
         });
       } else {
         res.status(400).json({
-          result: "Failed",
+          result: 'Failed',
           message: `Cannot delete User with id: ${id}`,
         });
       }
