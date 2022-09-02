@@ -1,17 +1,17 @@
-const { User } = require("../models");
+const { User } = require('../models');
 
 module.exports = {
-  async getHighScore(req, res) {
+  async getHighScore(_req, res) {
     const highScore = await User.findAll({
-      order: [["total_score", "DESC"]],
+      order: [['total_score', 'DESC']],
     });
     if (!highScore) {
       return res.status(404).json({
-        error: "No high score found",
+        error: 'No high score found',
       });
     }
     return res.status(200).json({
-      result: "Success",
+      result: 'Success',
       data: highScore,
     });
   },
@@ -22,7 +22,7 @@ module.exports = {
 
     if (!user) {
       return res.status(404).json({
-        error: "No user found",
+        error: 'No user found',
       });
     }
 
@@ -34,7 +34,7 @@ module.exports = {
     );
     if (!updatedUser) {
       return res.status(404).json({
-        error: "No user found",
+        error: 'No user found',
       });
     }
     return res.status(200).json(updatedUser);

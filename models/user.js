@@ -1,6 +1,6 @@
-const { Model } = require("sequelize");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+const { Model } = require('sequelize');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -17,8 +17,8 @@ module.exports = (sequelize, DataTypes) => {
     static async register({ email, username, password }) {
       if (!email || !username || !password) {
         return Promise.reject({
-          message: "Data invalid",
-          code: "auth/register-invalid",
+          message: 'Data invalid',
+          code: 'auth/register-invalid',
         });
       }
 
@@ -38,10 +38,10 @@ module.exports = (sequelize, DataTypes) => {
         //   password: this.#encrypt(password),
         // });
       } catch (error) {
-        if (error.name === "SequelizeUniqueConstraintError") {
+        if (error.name === 'SequelizeUniqueConstraintError') {
           return Promise.reject({
-            message: "User already exist",
-            code: "auth/user-exist",
+            message: 'User already exist',
+            code: 'auth/user-exist',
           });
         }
 
@@ -54,16 +54,16 @@ module.exports = (sequelize, DataTypes) => {
         const user = await this.findOne({ where: { username } });
         if (!user) {
           return Promise.reject({
-            message: "User not Found!",
-            code: "auth/user-not-found",
+            message: 'User not Found!',
+            code: 'auth/user-not-found',
           });
         }
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
           return Promise.reject({
-            message: "Wrong password",
-            code: "auth/user-not-found",
+            message: 'Wrong password',
+            code: 'auth/user-not-found',
           });
         }
         return Promise.resolve(user);
@@ -77,7 +77,8 @@ module.exports = (sequelize, DataTypes) => {
         id: this.id,
         username: this.username,
       };
-      const secret = "apayaaa";
+      const secret = process.env.APP_SECRET;
+      if (!secret) throw new Error('Please set APP_SECRET on env');
       const token = jwt.sign(payload, secret);
       return token;
     }
@@ -88,19 +89,19 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         unique: {
           args: true,
-          msg: "Email have been registered!",
+          msg: 'Email have been registered!',
         },
       },
       username: {
         type: DataTypes.STRING,
         unique: {
           args: true,
-          msg: "Username already exist",
+          msg: 'Username already exist',
         },
         validate: {
           notEmpty: {
             args: true,
-            msg: "Username is required",
+            msg: 'Username is required',
           },
         },
       },
@@ -109,11 +110,11 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           notEmpty: {
             args: true,
-            msg: "Password is required, cannot be blank",
+            msg: 'Password is required, cannot be blank',
           },
           len: {
             args: [6],
-            msg: "Password minimal 6 character",
+            msg: 'Password minimal 6 character',
           },
         },
       },
@@ -124,7 +125,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "User",
+      modelName: 'User',
     }
   );
   return User;
