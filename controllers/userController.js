@@ -55,39 +55,6 @@ class UserController {
   }
 
   static async updateUser(req, res) {
-    // const { id } = req.params;
-
-    // const user = await User.findByPk(id);
-    // if (!user) {
-    //   return res.status(404).json({
-    //     result: 'Not Found',
-    //     message: `User with ${id} not found`,
-    //   });
-    // }
-
-    // const updatedUser = await User.update(req.body, {
-    //   where: { id },
-    // });
-    // if (!updatedUser) {
-    //   return res.status(400).json({
-    //     result: 'Failed',
-    //     message: 'Failed to update user',
-    //   });
-    // }
-    // return res.status(200).json({
-    //   result: 'Success',
-    //   message: `User with id: ${id} successfully updated`,
-    // });
-    // if (updatedUser.error) {
-    //   return res.status(400);
-    // }
-
-    // if (updatedUser === 1) {
-    // return res.status(200).json({
-    //   result: "Success",
-    //   message: `User with id: ${id} successfully updated`,
-    // });
-    // } 
     try {
       const { id } = req.params;
       const user = await User.findByPk(id);
