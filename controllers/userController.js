@@ -80,11 +80,14 @@ class UserController {
           result: "Success",
           message: `User with id: ${id} successfully updated`,
         });
+        // eslint-disable-next-line no-else-return
+      } else {
+
+        return res.status(500).json({
+          result: "Failed",
+          message: "Failed to update",
+        });
       }
-      return res.status(500).json({
-        result: "Failed",
-        message: "Failed to update",
-      });
 
     } catch (error) {
       res.status(400).json({ error });
