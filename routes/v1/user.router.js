@@ -7,6 +7,7 @@ const restrict = require('../../middlewares/restrict');
 userRouter.get('/', restrict, UserController.getUsers);
 userRouter.get('/:id', restrict, UserController.getUserById);
 userRouter.put('/:id', restrict, UserController.updateUser);
+userRouter.put('/:id', restrict, UserController.updateAvatar);
 userRouter.delete('/:id', restrict, UserController.deleteUser);
 
 module.exports = userRouter;

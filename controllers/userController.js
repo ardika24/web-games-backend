@@ -80,6 +80,27 @@ class UserController {
     });
   }
 
+  static async updateAvatar(req, res, next) {
+    try {
+      let user = await User.findById(req.params.id);
+
+      await cloudinary.uploader.destroy(user.cloudinary_id);
+
+      let result;
+      if ((req, file)) {
+        result = await cloudinary.uploader.upload(req.file.path);
+      }
+      const data = {
+        avatar: result?.secure_url || user.avatar,
+        cloudinary_id: result?.public_id || user.cloudinary_id,
+      };
+      user = await User.findByIdAndUpdate(req.params.id, data, { new: true });
+      res.json(user);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   static async deleteUser(req, res, next) {
     try {
       const { id } = req.params;

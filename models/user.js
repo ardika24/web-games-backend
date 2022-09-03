@@ -122,6 +122,8 @@ module.exports = (sequelize, DataTypes) => {
       bio: DataTypes.STRING,
       city: DataTypes.STRING,
       social_media_url: DataTypes.STRING,
+      avatar: DataTypes.STRING,
+      cloudinary_id: DataTypes.STRING,
     },
     {
       sequelize,
