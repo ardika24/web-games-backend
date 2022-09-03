@@ -54,30 +54,41 @@ class UserController {
     });
   }
 
+  // eslint-disable-next-line consistent-return
   static async updateUser(req, res) {
-    const { id } = req.params;
+    try {
+      const { id } = req.params;
+      const user = await User.findByPk(id);
+      if (!user) {
+        return res.status(400).json({
+          result: "Failed",
+          message: `User with ${id} not Found`,
+        });
+      }
+      const updatedUser = await User.update(req.body,
+        {
+          where: { id },
+        }
+      );
 
-    const user = await User.findByPk(id);
-    if (!user) {
-      return res.status(404).json({
-        result: 'Not Found',
-        message: `User with ${id} not found`,
-      });
-    }
+      if (updatedUser.error) {
+        return res.status(400);
+      }
 
-    const updatedUser = await User.update(req.body, {
-      where: { id },
-    });
-    if (!updatedUser) {
-      return res.status(400).json({
-        result: 'Failed',
-        message: 'Failed to update user',
+      if (updatedUser === 1) {
+        return res.status(200).json({
+          result: "Success",
+          message: `User with id: ${id} successfully updated`,
+        });
+      }
+      return res.status(500).json({
+        result: "Failed",
+        message: "Failed to update",
       });
+
+    } catch (error) {
+      res.status(400).json({ error });
     }
-    return res.status(200).json({
-      result: 'Success',
-      message: `User with id: ${id} successfully updated`,
-    });
   }
 
   static async deleteUser(req, res, next) {
