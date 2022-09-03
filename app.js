@@ -1,9 +1,15 @@
-require("dotenv").config();
+require('dotenv').config();
+
+const express = require('express');
+const cors = require('cors');
+const passport = require('./lib/passport');
+const apiRouter = require('./routes');
 
 const express = require("express");
 const cors = require("cors");
 const passport = require("./lib/passport");
 const apiRouter = require("./routes");
+const PORT = process.env.PORT || 4000;
 
 const app = express();
 
