@@ -34,6 +34,9 @@ module.exports = {
       social_media_url: {
         type: Sequelize.STRING,
       },
+      profile_pic: {
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
